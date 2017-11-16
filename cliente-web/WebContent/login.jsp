@@ -17,16 +17,30 @@
 
 	<div class="container">
 
-		<form class="form-signin" action="index.jsp">
+		<form class="form-signin" 
+			  action="/cliente-web/LoginServlet"
+			  method="post">
 			<h2 class="form-signin-heading">Login</h2>
-			<label for="inputEmail" class="sr-only">Usuario]</label> <input
-				type="text" id="inputEmail" class="form-control"
-				placeholder="Usuario" required autofocus> <label
-				for="inputPassword" class="sr-only">Senha</label> <input
-				type="password" id="inputPassword" class="form-control"
-				placeholder="Senha" required>
+			
+			<label for="inputEmail" class="sr-only">Usuario]</label> 
+			<input type="text" 
+				   id="inputEmail"
+				   name="txtUsuario" 
+				   class="form-control"
+				   placeholder="Usuario" 
+				   required autofocus> 
+			
+			<label for="inputPassword" class="sr-only">Senha</label> 
+			<input type="password" 
+				   id="inputPassword"
+				   name="txtSenha" 
+				   class="form-control"
+				   placeholder="Senha" 
+				   required>
 	
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+			<button class="btn btn-lg btn-primary btn-block" 
+					type="submit">Login</button>
+		${erroLogin}
 		</form>
 
 	</div>

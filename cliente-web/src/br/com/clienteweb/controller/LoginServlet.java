@@ -3,6 +3,7 @@ package br.com.clienteweb.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,14 +33,31 @@ public class LoginServlet extends HttpServlet {
 		String senha = request.getParameter("txtSenha");
 		
 		
-		LoginDao daoUsuario = new LoginDao();
+		LoginDao daologin = new LoginDao();
 		
-		List<Login> lista = (List<Login>) daoUsuario.select();
+		List<Login> lista = (List<Login>) daologin.select();
 		
+		boolean autenticado = false;
+		
+		for (Login item : lista) {
+			if (item.getUsuario().equals(usuario) && item.getSenha().equals(senha)) {
+				autenticado = true;
+				break;
+			}
+		}
 
+		RequestDispatcher dispatcher = null;
+		if (autenticado)
+			dispatcher = request.getRequestDispatcher("/index.jsp");
+		else {
+			dispatcher = request.getRequestDispatcher("/login.jsp");
+			request.setAttribute("erroLogin", "Usuario ou senha informados incorretamente.");
+		}
 		
-		doGet(request, response);
+		dispatcher.forward(request, response);
+
 	}
+
 	
 	private String getParameter(HttpServlet request, String parametro) {
 		if(request != null && parametro != null && !parametro.equals(""))
